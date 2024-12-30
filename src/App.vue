@@ -25,9 +25,9 @@ import { RouterView } from 'vue-router';
 <style scoped>
 #mainSize {
   /*header + footer + border*/
-  max-height: calc(100vh - 53px);
-  min-height: calc(100vh - 53px);
-  height: calc(100vh - 53px);
+  max-height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
   overflow-y: hidden;
 }
 </style>

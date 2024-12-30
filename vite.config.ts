@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import autoprefixer from 'autoprefixer';
 import postcssNesting from 'postcss-nesting';
 import tailwindcss from 'tailwindcss';
-import { PrimeVueResolver } from 'unplugin-vue-components/resolvers';
+import { PrimeVueResolver } from '@primevue/auto-import-resolver';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig, loadEnv } from 'vite';
 import nightwatchPlugin from 'vite-plugin-nightwatch';
@@ -37,7 +37,11 @@ export default defineConfig(({ mode }) => {
     },
     css: {
       postcss: {
-        plugins: [postcssNesting, tailwindcss, autoprefixer()],
+        plugins: [
+          // postcssNesting,
+          tailwindcss,
+          // autoprefixer()
+        ],
       },
     },
   };

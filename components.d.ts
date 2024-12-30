@@ -9,10 +9,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('primevue/button')['default']
     ContextMenu: typeof import('primevue/contextmenu')['default']
-    Image: typeof import('primevue/image')['default']
+    HomeButton: typeof import('./src/components/HomeButton.vue')['default']
     Menu: typeof import('primevue/menu')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Skeleton: typeof import('primevue/skeleton')['default']
+  }
+  export interface ComponentCustomProperties {
+    Ripple: typeof import('primevue/ripple')['default']
   }
 }

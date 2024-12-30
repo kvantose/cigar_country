@@ -9,6 +9,9 @@ import router from './router';
 import PrimeVue from 'primevue/config';
 
 import Material from '@primevue/themes/material';
+import Aura from '@primevue/themes/Aura';
+import Lara from '@primevue/themes/Lara';
+import Nora from '@primevue/themes/Nora';
 import ComfirmationSerivce from 'primevue/confirmationservice';
 import Ripple from 'primevue/ripple';
 import ToastService from 'primevue/toastservice';
@@ -22,13 +25,13 @@ async function main() {
   app.use(router);
   app.use(PrimeVue, {
     theme: {
-      preset: Material,
+      preset: Nora,
     },
+    ripple:true,
   });
   app.use(ToastService);
   app.use(ComfirmationSerivce);
   app.directive('tooltip', Tooltip);
-  app.directive('ripple', Ripple);
 
   app.mount('#app');
 

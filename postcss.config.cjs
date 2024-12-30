@@ -1,12 +1,12 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import('postcss').Config} */
 module.exports = {
   parser: 'sugarss',
   map: false,
   plugins: {
+    'postcss-import': {},
     tailwindcss: {},
     autoprefixer: {},
-    // 'postcss-plugin': {
-    //   postcssNesting,
-    // },
+    postcssNesting: {},
+    autoprefixer: {},
   },
 };
