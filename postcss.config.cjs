@@ -8,5 +8,6 @@ module.exports = {
     autoprefixer: {},
     postcssNesting: {},
     autoprefixer: {},
+    'postcss-css-variables': {},
   },
 };

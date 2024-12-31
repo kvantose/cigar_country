@@ -8,15 +8,30 @@ import router from './router';
 
 import PrimeVue from 'primevue/config';
 
-import Material from '@primevue/themes/material';
+import { definePreset } from '@primevue/themes';
 import Aura from '@primevue/themes/Aura';
-import Lara from '@primevue/themes/Lara';
-import Nora from '@primevue/themes/Nora';
 import ComfirmationSerivce from 'primevue/confirmationservice';
-import Ripple from 'primevue/ripple';
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
 const currentEnv = import.meta.env.VITE_NODE_ENV;
+
+const myPreset = definePreset(Aura, {
+  semantic: {
+    primary: {
+      50: '{amber.50}',
+      100: '{amber.100}',
+      200: '{amber.200}',
+      300: '{amber.300}',
+      400: '{amber.400}',
+      500: '{amber.500}',
+      600: '{amber.600}',
+      700: '{amber.700}',
+      800: '{amber.800}',
+      900: '{amber.900}',
+      950: '{amber.950}',
+    },
+  },
+});
 
 async function main() {
   const app = createApp(App);
@@ -25,9 +40,9 @@ async function main() {
   app.use(router);
   app.use(PrimeVue, {
     theme: {
-      preset: Nora,
+      preset: myPreset,
     },
-    ripple:true,
+    ripple: true,
   });
   app.use(ToastService);
   app.use(ComfirmationSerivce);
