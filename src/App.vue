@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router';
 
 <template>
   <HeaderView />
-  <div class="px-2 container-fluid">
+  <div class="container-fluid px-2 py-2">
     <div id="mainSize" class="flex flex-row">
       <div class="col h-full w-full">
         <RouterView v-slot="{ Component }">
@@ -19,15 +19,14 @@ import { RouterView } from 'vue-router';
   </div>
 
   <Toast />
-  <ConfirmDialog class="xl:w-6 lg:w-8 md:w-full sm:w-full" />
+  <ConfirmDialog class="sm:w-full md:w-full lg:w-8 xl:w-6" />
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 #mainSize {
-  /*header + footer + border*/
-  max-height: calc(100vh - 60px);
-  min-height: calc(100vh - 60px);
   height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  max-height: calc(100vh - 60px);
   overflow-y: hidden;
 }
 </style>

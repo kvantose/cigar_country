@@ -6,7 +6,7 @@
       :model="menuItems"
       breakpoint="950px"
       style="background-color: var(--surface-900)"
-      class="border-noround-bottom border-none p-1 text-gray-400"
+      class="!rounded-none !border-b-white p-1 text-gray-400"
     >
       <template #start>
         <HomeButton />
@@ -51,7 +51,7 @@
         </a>
       </template>
       <template #end>
-        <Button
+        <!-- <Button
           rounded
           @click="toggleAccountMenu"
           @click.right="
@@ -62,7 +62,20 @@
           "
           aria-haspopup="true"
           aria-controls="overlay_menu"
-        ></Button>
+        > -->
+        <Avatar
+          image="/my_avatar.JPEG"
+          shape="circle"
+          size="large"
+          @click="toggleAccountMenu"
+          @click.right="
+            (event:MouseEvent) => {
+              event.preventDefault();
+              toggleAccountMenu(event);
+            }
+          "
+        ></Avatar>
+        <!-- </Button> -->
       </template>
     </Menubar>
 
@@ -176,11 +189,11 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
 #header {
   height: 60px !important;
   min-height: 60px !important;
-  max-height: 60px !important;
+  /*max-height: 60px !important;*/
 }
 
 /* .p-menubar :deep(*) {

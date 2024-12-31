@@ -24,6 +24,7 @@
           promptLabel="Введите пароль"
           class="!mb-6 !w-full !bg-white/10 !text-xl"
           id="auth_password"
+          :feedback="false"
         />
         <label for="auth_password" class="!text-white/90">Пароль</label>
       </FloatLabel>
