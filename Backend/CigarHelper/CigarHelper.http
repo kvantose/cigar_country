@@ -1,0 +1,6 @@
+@CigarHelper_HostAddress = http://localhost:5022
+
+GET {{CigarHelper_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
