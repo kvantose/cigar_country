@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 
 export const useAccountStore = defineStore('account', {
   state: () => ({
-    user: {} as User,
+    user: {} as CigarUser,
     login: '',
     plainPassword: '',
     encryptedPassword: '',
@@ -26,14 +26,19 @@ export const useAccountStore = defineStore('account', {
       const hash = bcrypt.hashSync(pass, 10);
       return hash;
     },
+    async saveProfile() {
+      return true;
+    },
   },
 });
 
-type User = {
+type CigarUser = {
   login: string;
   nickname: string;
-  firstName: string;
-  lastName: string;
-  city: string;
+  firstName?: string;
+  lastName?: string;
+  city?: string;
   avatar?: string;
 };
+
+export type { CigarUser };

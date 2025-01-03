@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'account',
       component: () => import('@/views/AccountView.vue'),
     },
+    {
+      path: '/humidor',
+      name: 'humidor',
+      component: () => import('@/views/HumidorView.vue'),
+    },
     // {
     //   path: '/about',
     //   name: 'about',

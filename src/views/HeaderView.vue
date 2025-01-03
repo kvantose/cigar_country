@@ -33,7 +33,7 @@
             @click.middle="openNewTab(item)"
             @contextmenu="openContextMenu($event, item)"
           >
-            <span v-if="item.icon" :class="item.icon" />
+            <Icon v-if="item.icon" :icon="item.icon" />
             <span class="p-menuitem-text" data-pc-section="label">{{ item.label }}</span>
           </a>
         </RouterLink>
@@ -45,7 +45,7 @@
           v-bind="props.action"
           :class="['p-2 text-lg']"
         >
-          <span :class="item.icon" />
+          <Icon v-if="item.icon" :icon="item.icon" />
           <span class="p-menuitem-text ml-2" data-pc-section="label">{{ item.label }}</span>
           <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
         </a>
@@ -86,11 +86,25 @@
       </div>
     </div>
     <ContextMenu ref="menu" :model="contextMenuItems" />
-    <Menu ref="account_menu" :model="accountMenuItems" popup id="overlay_menu"></Menu>
+    <Menu ref="account_menu" :model="accountMenuItems" popup id="overlay_menu">
+      <template #item="{ item, props }">
+        <a v-ripple class="flex items-center" v-bind="props.action">
+          <Icon v-if="item.icon" :icon="item.icon" />
+          <span>{{ item.label }}</span>
+          <Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
+          <span
+            v-if="item.shortcut"
+            class="border-surface bg-emphasis text-muted-color ml-auto rounded border p-1 text-xs"
+            >{{ item.shortcut }}</span
+          >
+        </a>
+      </template>
+    </Menu>
   </header>
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue';
 import type { MenuItem } from 'primevue/menuitem';
 import { computed, onMounted, ref, useTemplateRef } from 'vue';
 import { useRouter } from 'vue-router';
@@ -105,7 +119,7 @@ const menuItems = computed<MenuItem[]>(() => {
     {
       label: 'Лента',
       url: '/',
-      icon: 'pi pi-home',
+      icon: 'fluent:news-16-regular',
       visible: true,
       command: () => {
         router.push({ name: '/' });
@@ -114,7 +128,7 @@ const menuItems = computed<MenuItem[]>(() => {
     {
       label: 'Каталог',
       url: '/',
-      icon: 'pi pi-home',
+      icon: 'tdesign:catalog',
       visible: true,
       command: () => {
         router.push({ name: '/' });
@@ -123,7 +137,7 @@ const menuItems = computed<MenuItem[]>(() => {
     {
       label: 'Админка',
       url: '/',
-      icon: 'pi pi-home',
+      icon: 'eos-icons:admin-outlined',
       visible: true,
       command: () => {
         router.push({ name: '/' });
@@ -157,22 +171,22 @@ const accountMenu = useTemplateRef('account_menu'),
   accountMenuItems = ref<MenuItem[]>([
     {
       label: 'Профиль',
-      icon: 'pi pi-user',
+      icon: 'heroicons-outline:user-circle',
       command: () => {
         router.push({ name: 'account' });
       },
     },
     {
       label: 'Мой хьюмидор',
-      icon: 'pi pi-cog',
+      icon: 'heroicons-outline:archive-box',
       command: () => {
         //TODO добавить айдишник пользователя
-        router.push({ name: 'account', params: {} });
+        router.push({ name: 'humidor', params: {} });
       },
     },
     {
       label: 'Выход',
-      icon: 'pi pi-sign-out',
+      icon: 'material-symbols:logout-rounded',
       command: () => {
         router.push({ name: 'login' });
       },
