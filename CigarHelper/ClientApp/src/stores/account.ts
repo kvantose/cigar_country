@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs';
 import { defineStore } from 'pinia';
 
 export const useAccountStore = defineStore('account', {
@@ -14,8 +14,9 @@ export const useAccountStore = defineStore('account', {
         return '';
       }
 
-      const hash = bcrypt.hashSync(state.plainPassword, 10);
-      return hash;
+      // const hash = bcrypt.hashSync(state.plainPassword, 10);
+      // return hash;
+      return '';
     },
   },
   actions: {
@@ -23,8 +24,10 @@ export const useAccountStore = defineStore('account', {
       if (!pass) {
         return '';
       }
-      const hash = bcrypt.hashSync(pass, 10);
-      return hash;
+      // const hash = bcrypt.hashSync(pass, 10);
+      // return hash;
+
+      return '';
     },
     async saveProfile() {
       return true;

@@ -1,91 +1,134 @@
 using System;
-using System.Net.Http.Headers;
-using CigarHelper.Controllers;
-using Microsoft.AspNetCore.Authentication;
+using System.Configuration;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
-using Yarp.ReverseProxy.Transforms;
+using Microsoft.IdentityModel.Tokens;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration;
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-// Add services to the container.
-builder.Services
-    .AddAuthorization()
-    .AddAuthentication(options => configuration.Bind("Authentication", options))
-    .AddCookie()
-    .AddOpenIdConnect(options => configuration.Bind("OpenIdConnect", options))
-    ;
-builder.Services.AddHttpForwarder();
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddJsonFile($"appsettings.{(string.IsNullOrWhiteSpace(environment) ? "Development" : environment)}.json", true)
+    .AddEnvironmentVariables()
+    .Build();
 
-builder.Services.AddCors(
-    options => options.AddPolicy(
-        HomeController.CorsPolicyName,
-        policyBuilder =>
-        {
-            var allowedOrigins = configuration.GetSection("CorsSettings:AllowedOrigins").Get<string[]>();
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console().CreateBootstrapLogger();
 
-            if (allowedOrigins is { Length: > 0 })
-                policyBuilder.WithOrigins(allowedOrigins);
-
-            policyBuilder
-                .WithMethods(HttpMethods.Get)
-                .AllowCredentials();
-        }));
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-// builder.Services.AddOpenApi();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.MapOpenApi();
-}
-else
-{
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
 
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseCors(HomeController.CorsPolicyName);
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-app.MapControllers();
+    var builder = WebApplication.CreateBuilder(args);
+    var services = builder.Services;
 
-const string key = "OpenIdConnect:Resource";
-var destinationPrefix = configuration.GetValue<string>(key)
-                        ?? throw new InvalidOperationException($"The value {key} must be set");
-
-app.MapForwarder(
-    "/cc/{**catch-all}",
-    destinationPrefix,
-    builderContext =>
+    services.Configure<IdentityOptions>(options =>
     {
-        // Cut the "/bff" prefix from the request path
-        builderContext.AddPathRemovePrefix("/cc");
-        builderContext.AddRequestTransform(async transformContext =>
+        // ...
+    });
+
+    services.AddCors(opt =>
+    {
+        opt.AddDefaultPolicy(builder => builder.SetIsOriginAllowed(_ => true).WithOrigins("http://localhost:5173")
+            .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+    });
+
+// игнорирование регистра (url без заглавных букв)
+    services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+
+// подключение репозиториев
+
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
         {
-            // Get the access token received earlier during the authentication process
-            var accessToken = await transformContext.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+            options.RequireHttpsMetadata = false;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                //ValidIssuer = "",
 
-            // Append a header with access token to the proxy request
-            transformContext.ProxyRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                ValidateAudience = false,
+                //ValidAudience = "",
+
+                ValidateLifetime = true,
+
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Jwt:Key"])),
+                ValidateIssuerSigningKey = true,
+            };
         });
-    }).RequireAuthorization();
 
-app.MapFallbackToFile("index.html").RequireAuthorization();
+    services.AddAuthorization(options =>
+    {
+        options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+            .RequireAuthenticatedUser()
+            .Build();
+    });
 
+    services.AddControllers();
+    services.AddHttpContextAccessor();
+    services.AddSerilog((_,lc)=>lc.ReadFrom.Configuration(configuration));
 
-app.Run();
+    services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
+
+    await using var app = builder.Build();
+    var env = app.Environment;
+
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+        app.UseCors();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Error"); //ToDo: do it better
+        app.UseHsts();
+    }
+
+    app.UseRouting();
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+    app.UseSpaStaticFiles();
+    app.UseAuthentication();
+
+    app.MapControllers();
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    });
+
+    app.UseSpaStaticFiles(new StaticFileOptions(){RequestPath = "/ClientApp/dist"});
+    app.UseSpa(spa =>
+    {
+        spa.Options.SourcePath = "ClientApp";
+
+        if (env.IsDevelopment())
+        {
+            spa.UseProxyToSpaDevelopmentServer("http://localhost:5173");
+            // актуально для ReactJS
+            // spa.UseReactDevelopmentServer(npmScript: "start");
+        }
+    });
+
+    Log.Information($"Starting web host with env {env.EnvironmentName}");
+    await app.RunAsync();
+
+    return 0;
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+    return 1;
+}
+finally
+{
+    await Log.CloseAndFlushAsync();
+}

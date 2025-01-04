@@ -4,3 +4,6 @@ GET {{CigarHelper_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{CigarHelper_HostAddress}}/weatherforecast/
+Accept: application/json
