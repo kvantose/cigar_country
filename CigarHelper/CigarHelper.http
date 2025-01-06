@@ -1,9 +1,27 @@
-@CigarHelper_HostAddress = http://localhost:5022
+###
+@CigarHelper_HostAddress = https://localhost:5003
 
 GET {{CigarHelper_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
 
-GET {{CigarHelper_HostAddress}}/weatherforecast/
+GET {{CigarHelper_HostAddress}}/account/Auth
 Accept: application/json
+
+###
+
+POST {{CigarHelper_HostAddress}}/api/Account/Auth
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "password": "admin"
+}
+
+###
+GET https://examples.http-client.intellij.net/json
+
+> {%
+    client.log(jsonPath(response.body, "$.slideshow.slides[0].title",))
+%}
