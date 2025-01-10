@@ -34,6 +34,9 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
 
+  --background-link-hover: #06a55b;
+
+
   --section-gap: 160px;
 }
 
@@ -72,3 +75,4 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+  
