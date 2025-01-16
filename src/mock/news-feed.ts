@@ -4,8 +4,8 @@ export const newsFeed = [
   {
     id: 1,
     title: 'News 1',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.',
-    img: "https://cigarday.ru/images/cms/thumbs/0930c4f51bb70f13d4fc90546d3a6df785243836/wild-chirchill_370_auto_png_5_80.png",
+    content: '1 TEXT Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.',
+    img: "https://ichef.bbci.co.uk/images/ic/1200x675/p048lq4v.jpg",
     likes: 10,
     comment: 5,
     date: new Date().toDateString()
@@ -13,8 +13,8 @@ export const newsFeed = [
   {
     id: 2,
     title: 'News 2',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.',
-    img: "https://cigarday.ru/images/cms/thumbs/0930c4f51bb70f13d4fc90546d3a6df785243836/wild-chirchill_370_auto_png_5_80.png",
+    content: '2 TEXT Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.',
+    img: "https://ichef.bbci.co.uk/images/ic/1200x675/p048lq4v.jpg",
     likes: 7,
     comment: 1,
     date: new Date().toDateString()
@@ -22,8 +22,8 @@ export const newsFeed = [
   {
     id: 3,
     title: 'News 3',
-    content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.',
-    img: "https://cigarday.ru/images/cms/thumbs/0930c4f51bb70f13d4fc90546d3a6df785243836/wild-chirchill_370_auto_png_5_80.png",
+    content: '3 TEXT Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, ipsam.',
+    img: "https://ichef.bbci.co.uk/images/ic/1200x675/p048lq4v.jpg",
     likes: 1,
     comment: 7,
     date: new Date().toDateString()

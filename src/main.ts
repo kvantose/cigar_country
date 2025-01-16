@@ -16,10 +16,14 @@ import ComfirmationSerivce from 'primevue/confirmationservice';
 import Ripple from 'primevue/ripple';
 import ToastService from 'primevue/toastservice';
 import Tooltip from 'primevue/tooltip';
+import AnimateOnScroll from 'primevue/animateonscroll';
+
 const currentEnv = import.meta.env.VITE_NODE_ENV;
 
 async function main() {
   const app = createApp(App);
+
+  app.directive('animateonscroll', AnimateOnScroll);
 
   app.use(createPinia());
   app.use(router);

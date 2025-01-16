@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AlertAdult: typeof import('./src/components/AlertAdult.vue')['default']
     Button: typeof import('primevue/button')['default']
+    ButtonDefault: typeof import('./src/components/ButtonDefault.vue')['default']
     ConfirmDialog: typeof import('primevue/confirmdialog')['default']
     ContextMenu: typeof import('primevue/contextmenu')['default']
     Dialog: typeof import('primevue/dialog')['default']
@@ -16,7 +17,7 @@ declare module 'vue' {
     Footer: typeof import('./src/components/Footer.vue')['default']
     FooterDefault: typeof import('./src/components/FooterDefault.vue')['default']
     HomeButton: typeof import('./src/components/HomeButton.vue')['default']
-    InputText: typeof import('primevue/inputtext')['default']
+    InputText: typeof import('./src/components/InputText.vue')['default']
     Menu: typeof import('primevue/menu')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -26,6 +27,7 @@ declare module 'vue' {
     Toast: typeof import('primevue/toast')['default']
   }
   export interface ComponentCustomProperties {
+    AnimateOnScroll: typeof import('primevue/animateonscroll')['default']
     Ripple: typeof import('primevue/ripple')['default']
   }
 }
