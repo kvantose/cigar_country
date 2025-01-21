@@ -24,14 +24,13 @@ async function main() {
   const app = createApp(App);
 
   app.directive('animateonscroll', AnimateOnScroll);
-
   app.use(createPinia());
   app.use(router);
   app.use(PrimeVue, {
     theme: {
       preset: Nora,
     },
-    ripple:true,
+    ripple: true,
   });
   app.use(ToastService);
   app.use(ComfirmationSerivce);

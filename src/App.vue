@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import HeaderView from '@/views/HeaderView.vue';
 import { ConfirmDialog, Toast } from 'primevue';
-import { RouterView } from 'vue-router';
 import AlertAdult from '@/components/AlertAdult.vue';
 import "./assets/base.css"
+
 </script>
 
 <template>
-
   <AlertAdult />
   <HeaderView />
   <div class="container-fluid">

@@ -23,7 +23,13 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     ScrollPanel: typeof import('primevue/scrollpanel')['default']
     ScrollTop: typeof import('primevue/scrolltop')['default']
+    SelectButton: typeof import('primevue/selectbutton')['default']
     Skeleton: typeof import('primevue/skeleton')['default']
+    Step: typeof import('primevue/step')['default']
+    StepList: typeof import('primevue/steplist')['default']
+    StepPanel: typeof import('primevue/steppanel')['default']
+    StepPanels: typeof import('primevue/steppanels')['default']
+    Stepper: typeof import('primevue/stepper')['default']
     Toast: typeof import('primevue/toast')['default']
   }
   export interface ComponentCustomProperties {
