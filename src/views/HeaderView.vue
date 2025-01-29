@@ -1,15 +1,21 @@
 <template>
-  <header id="header">
+  <header>
     <Menubar
       v-if="!loading"
       exact
+      id="header"
       :model="menuItems"
       breakpoint="950px"
       style="background-color: var(--surface-900)"
-      class="border-noround-bottom border-none p-1 text-gray-400"
+      class="text-gray-400 p-1 border-none border-noround-bottom"
     >
       <template #start>
-        <HomeButton />
+        <Button class="text-xl p-0" @click="homeClick">
+          <template #default>
+            <span class="font-bold text-white">Cigar</span
+            ><span class="font-normal text-white">Country</span>
+          </template>
+        </Button>
       </template>
 
       <template #item="{ item, props, hasSubmenu }">
@@ -23,7 +29,7 @@
             v-ripple
             :class="[
               'p-menuitem-link',
-              'p-2 text-lg',
+              'text-lg p-2',
               { 'router-link-active': isActive },
               isExactActive && 'router-link-exact-active',
             ]"
@@ -43,10 +49,10 @@
           :href="item.url"
           :target="item.target"
           v-bind="props.action"
-          :class="['p-2 text-lg']"
+          :class="['text-lg p-2']"
         >
           <span :class="item.icon" />
-          <span class="p-menuitem-text ml-2" data-pc-section="label">{{ item.label }}</span>
+          <span class="ml-2 p-menuitem-text" data-pc-section="label">{{ item.label }}</span>
           <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down ml-2" />
         </a>
       </template>
@@ -54,26 +60,29 @@
         <Button
           rounded
           @click="toggleAccountMenu"
-          @click.right="
-            (event) => {
-              event.preventDefault();
-              toggleAccountMenu(event);
-            }
-          "
           aria-haspopup="true"
           aria-controls="overlay_menu"
         ></Button>
       </template>
     </Menubar>
 
-    <div v-else class="flex items-center gap-3 p-4 pt-2">
-      <HomeButton />
-      <div class="flex w-full items-center justify-between">
-        <Skeleton class="flex-grow-1 w-full" height="2rem"></Skeleton>
+    <div
+      v-else
+      class="flex items-center gap-3"
+      style="background-color: var(--surface-900)"
+      id="header"
+    >
+      <Button text class="text-xl" @click="homeClick"
+        ><span class="font-bold text-white">Cigar</span
+        ><span class="font-normal text-white">Country</span></Button
+      >
+      <div class="flex items-center justify-between w-full">
+        <Skeleton class="w-full flex-grow-1" height="2rem"></Skeleton>
+        <Skeleton class="flex-grow-0" height="2rem" width="40px"></Skeleton>
       </div>
     </div>
     <ContextMenu ref="menu" :model="contextMenuItems" />
-    <Menu ref="account_menu" :model="accountMenuItems" popup id="overlay_menu"></Menu>
+    <Menu ref="account_menu" :model="accountMenuItems" :popup="true" id="overlay_menu"></Menu>
   </header>
 </template>
 
@@ -82,7 +91,6 @@ import type { MenuItem } from 'primevue/menuitem';
 import { computed, onMounted, ref, useTemplateRef } from 'vue';
 import { useRouter } from 'vue-router';
 
-import HomeButton from '@/components/HomeButton.vue';
 import Menubar from 'primevue/menubar';
 
 const router = useRouter();
@@ -90,25 +98,7 @@ const router = useRouter();
 const menuItems = computed<MenuItem[]>(() => {
   return [
     {
-      label: 'Лента',
-      url: '/',
-      icon: 'pi pi-home',
-      visible: true,
-      command: () => {
-        router.push({ name: '/' });
-      },
-    },
-    {
-      label: 'Каталог',
-      url: '/',
-      icon: 'pi pi-home',
-      visible: true,
-      command: () => {
-        router.push({ name: '/' });
-      },
-    },
-    {
-      label: 'Админка',
+      label: 'Home',
       url: '/',
       icon: 'pi pi-home',
       visible: true,
@@ -118,6 +108,10 @@ const menuItems = computed<MenuItem[]>(() => {
     },
   ];
 });
+
+const homeClick = () => {
+  router.push({ name: 'home' });
+};
 
 const openNewTab = (menuItem: MenuItem) => {
   const routeData = router.resolve(menuItem.route);
@@ -170,17 +164,17 @@ const accountMenu = useTemplateRef('account_menu'),
   };
 
 onMounted(() => {
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
+  // setTimeout(() => {
+  //   loading.value = false;
+  // }, 5000);
 });
 </script>
 
 <style scoped>
 #header {
-  height: 60px !important;
-  min-height: 60px !important;
   max-height: 60px !important;
+  min-height: 60px !important;
+  height: 60px !important;
 }
 
 /* .p-menubar :deep(*) {
